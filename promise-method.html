@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <table>
+
+        <tr>
+            <td id="">type: </td>
+            <td id="type"></td>
+        </tr>
+        <tr>
+            <td id="">name: </td>
+            <td id="name"></td>
+        </tr>
+        <tr>
+            <td id="">attack: </td>
+            <td id="attack"></td>
+        </tr>
+        <tr>
+            <td id="">price: </td>
+            <td id="price"></td>
+        </tr>
+
+    </table>
+
+    <h3 id="h3"></h3>
+
+    <script>
+
+        function getProduct(items) {
+            return new Promise(function (resolve, reject) {
+                const ajax = new XMLHttpRequest();
+
+                ajax.open('GET', `api/${items}.json`);
+
+                ajax.onload = function () {
+                    if (ajax.status === 200) {
+                        resolve(ajax.responseText);
+                    } else {
+                        reject(`Error, response: ${ajax.status}`);
+                    }
+                }
+
+                ajax.send();
+            })
+        }
+
+        getProduct('items')
+            .then(function (response) {
+                return JSON.parse(response);
+            })
+            .then(function (json) {
+                document.getElementById('type').textContent = `${json.type}`;
+                document.getElementById('name').textContent = `${json.name}`;
+                document.getElementById('attack').textContent = `${json.atk}`;
+                document.getElementById('price').textContent = ` ${json.price} silver coin`;
+            })
+            .catch(function (error) {
+                document.getElementById('type').textContent = error;
+                document.getElementById('name').textContent = error;
+                document.getElementById('price').textContent = error;
+            })
+            .finally(function () {
+                document.getElementById('h3').textContent = 'Finally';
+            })
+
+    </script>
+
+</body>
+
+</html>

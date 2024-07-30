@@ -1,0 +1,6 @@
+{
+    "type": "Weapon",
+    "name": "Bow",
+    "atk": "+40",
+    "price": 20
+}

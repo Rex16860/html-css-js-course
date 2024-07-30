@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1></h1>
+
+    <script>
+
+        const ajax = new XMLHttpRequest();
+        ajax.open("GET", "api/hello.json");
+
+        ajax.onload = function () {
+            const json = JSON.parse(ajax.responseText); // return object
+
+            const request = document.querySelector('h1');
+            request.textContent = json.response;
+        };
+
+        ajax.send();
+
+        console.info(ajax);
+
+    </script>
+
+</body>
+
+</html>

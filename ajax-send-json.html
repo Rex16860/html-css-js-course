@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="">
+        <label for="username">
+            username:
+            <input type="text" name="username" id="username">
+        </label>
+        <br>
+        <label for="password">
+            password:
+            <input type="text" name="password" id="password">
+        </label>
+        <br>
+        <input type="button" id="submit" value="login">
+    </form>
+
+    <h1 id="response"></h1>
+
+    <script>
+
+        function doLogin() {
+
+            const ajax = new XMLHttpRequest();
+            ajax.open("POST", "https://eo6ouzh0z4u453x.m.pipedream.net");
+
+            ajax.onload = function () {
+                const response = document.getElementById("response");
+                response.innerHTML = ajax.responseText;
+            }
+            ajax.setRequestHeader("Content-Type", "application/json");
+
+            const json = {
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+            }
+            ajax.send(JSON.stringify(json)); // send data to server should string formated
+        }
+
+        document.getElementById("submit").onclick = doLogin;
+
+    </script>
+
+</body>
+
+</html>

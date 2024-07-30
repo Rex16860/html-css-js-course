@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <table>
+
+        <tr>
+            <td id="">type: </td>
+            <td id="type"></td>
+        </tr>
+        <tr>
+            <td id="">name: </td>
+            <td id="name"></td>
+        </tr>
+        <tr>
+            <td id="">attack: </td>
+            <td id="attack"></td>
+        </tr>
+        <tr>
+            <td id="">price: </td>
+            <td id="price"></td>
+        </tr>
+
+    </table>
+
+    <h3 id="h3"></h3>
+
+    <script>
+
+        function getProduct(items) {
+            return new Promise(function (resolve, reject) {
+                const ajax = new XMLHttpRequest();
+
+                ajax.open('GET', `api/${items}.json`);
+
+                ajax.onload = function () {
+                    if (ajax.status === 200) {
+                        console.info(ajax.responseText)
+                        resolve(ajax.responseText);
+                    } else {
+                        reject(`Error, response: ${ajax.status}`);
+                    }
+                }
+
+                ajax.send();
+            })
+        }
+
+        // const promise = Promise.all([
+        //     getProduct('items'),
+        //     getProduct('items2'),
+        //     getProduct('items3'),
+        // ])
+        // const promise = Promise.any([
+        //     getProduct('items'),
+        //     getProduct('items2'),
+        //     getProduct('items3'),
+        // ])
+        const promise = Promise.race([
+            getProduct('items'),
+            getProduct('items2'),
+            getProduct('items3'),
+        ])
+
+        promise.then(function (items) {
+            console.info(items);
+        })
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="">
+        <label for="username">
+            username:
+            <input type="text" name="username" id="username">
+        </label>
+        <br>
+        <label for="password">
+            password:
+            <input type="text" name="password" id="password">
+        </label>
+        <br>
+        <input type="button" id="submit" value="login">
+    </form>
+
+    <h1 id="response"></h1>
+
+    <script>
+
+        function doLogin() {
+            const request = new Request("https://my-ajax-course.free.beeceptor.com", {
+                method: "POST",
+                headers: {
+
+                },
+                body: JSON.stringify({
+                    username: document.getElementById("username").value,
+                    password: document.getElementById("password").value
+                })
+            });
+
+            // Promise<Response>
+            const response = fetch(request);
+
+            response
+                .then((response) => response.text())
+                .then(function (response) {
+                    document.getElementById("response").textContent = response;
+                })
+                .catch(function (error) {
+                    document.getElementById("response").textContent = error;
+                })
+        }
+
+        document.getElementById("submit").onclick = doLogin
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function getPromise() {
+            return new Promise(function (resolve, reject) {
+                resolve('Promise')
+            })
+        }
+
+        async function getAsync() {
+            return 'Async'
+        }
+
+        getPromise()
+            .then((result) => {
+                console.info(result)
+            }).catch((err) => {
+                console.info(err)
+            });
+
+        getAsync()
+            .then((result) => {
+                console.info(result)
+            }).catch((err) => {
+                console.info(err)
+            });
+
+    </script>
+</body>
+
+</html>

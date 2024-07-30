@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="">
+        <label for="search">
+            search:
+            <input type="text" name="search" id="search">
+        </label>
+        <input type="button" id="submitBtn" value="login">
+    </form>
+
+    <p id="response"></p>
+
+    <script>
+
+        function doLogin() {
+
+            const ajax = new XMLHttpRequest();
+
+            // param
+            const param = new URLSearchParams()
+            param.append('search', document.getElementById('search').value);
+            param.append('filter', document.getElementById('search').value);
+
+            ajax.open("get", `https://eo6ouzh0z4u453x.m.pipedream.net?${param}`);
+
+            ajax.onload = function () {
+                const response = document.getElementById("response");
+                response.innerHTML = ajax.responseText;
+            }
+
+            ajax.send();
+        }
+
+        document.getElementById("submitBtn").onclick = doLogin;
+
+    </script>
+
+</body>
+
+</html>
